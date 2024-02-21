@@ -1,36 +1,45 @@
-//pega a quantidade de ingressos disponiveis
-let qtdPista = parseInt(document.getElementById('qtd-pista').textContent);
-let qtdSuperior = parseInt(document.getElementById('qtd-superior').textContent);
-let qtdInferior = parseInt(document.getElementById('qtd-inferior').textContent);
-
 function comprar() {
-    //pega o tipo e quantidade do ingresso solicitado
-    let tipoIngresso = document.getElementById('tipo-ingresso').value;
-    let quantidade = parseInt(document.getElementById('qtd').value);
+    let tipo = document.getElementById('tipo-ingresso');
+    let qtd = document.getElementById('qtd').value;
 
-    //pega o ingresso selecionado e a quantidade e subtrai da quantidade total
-    if (tipoIngresso == 'pista') {
-        if ((qtdPista = qtdPista - quantidade) < 0) {
-            alert('Quantidade indisponivel para Pista');
-            qtdPista = qtdPista + quantidade;
-        } else {
-            document.getElementById('qtd-pista').innerHTML = `${qtdPista}`;
-        }
-    } else if (tipoIngresso == 'superior') {
-        if ((qtdSuperior = qtdSuperior - quantidade) < 0) {
-            alert('Quantidade indisponivel para Superior');
-            qtdSuperior = qtdSuperior + quantidade;
-            console.log(qtdSuperior)
-        } else {
-            document.getElementById('qtd-superior').innerHTML = `${qtdSuperior}`;
-        }
-    } else if (tipoIngresso == 'inferior') {
-        if ((qtdInferior = qtdInferior - quantidade) < 0) {
-            alert('Quantidade indisponivel para Inferior');
-            qtdInferior = qtdInferior + quantidade;
-        } else {
-            document.getElementById('qtd-inferior').innerHTML = `${qtdInferior}`;
-        }
+    if (tipo.value == 'pista') {
+        comprarPista(qtd);
+    } else if (tipo.value == 'superior') {
+        comprarSuperior(qtd);
+    } else {
+        comprarInferior(qtd);
+    }
+}
 
+function comprarPista(qtd) {
+    let qtdPista = parseInt(document.getElementById('qtd-pista').textContent);
+    if (qtd > qtdPista) {
+        alert('Quantidade indisponível para tipo pista');
+    } else {
+        qtdPista = qtdPista - qtd;
+        document.getElementById('qtd-pista').textContent = qtdPista;
+        alert('Compra realizada com sucesso!');
+    }
+}
+
+function comprarSuperior(qtd) {
+    let qtdSuperior = parseInt(document.getElementById('qtd-superior').textContent);
+    if (qtd > qtdSuperior) {
+        alert('Quantidade indisponível para tipo superior');
+    } else {
+        qtdSuperior = qtdSuperior - qtd;
+        document.getElementById('qtd-superior').textContent = qtdSuperior;
+        alert('Compra realizada com sucesso!');
+    }
+}
+
+function comprarInferior(qtd) {
+    let qtdInferior = parseInt(document.getElementById('qtd-inferior').textContent);
+    if (qtd > qtdInferior) {
+        alert('Quantidade indisponível para tipo inferior');
+    } else {
+        qtdInferior = qtdInferior - qtd;
+        document.getElementById('qtd-inferior').textContent = qtdInferior;
+        alert('Compra realizada com sucesso!');
     }
 }
